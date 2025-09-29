@@ -1,0 +1,628 @@
+/* css/home.css */
+
+/* Define as variáveis de cor (Custom Properties) */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #00B4D8;
+    --dark-color: #333;
+    --light-color: #f8f8f8;
+    --blue-bg-dark: #001f3f;
+    --card-blue-gradient-start: #004d99;
+    --card-blue-gradient-end: #0066cc;
+    --accent-blue-gradient-start: #0099ff;
+    --accent-blue-gradient-end: #00c4ff;
+    --text-light: #f0f0f0;
+    --text-dark: #333;
+}
+
+/* Importa a fonte Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #fff;
+    color: var(--text-dark);
+}
+
+/* ------------------- SEÇÃO PRINCIPAL (HERO) - CÓDIGO CORRIGIDO ------------------- */
+.hero-section {
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center;
+    padding: 80px 20px;
+    background-color: var(--blue-bg-dark); /* Fundo azul escuro */
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden; 
+    flex-wrap: wrap; 
+    gap: 40px; /* Adiciona um espaço entre o texto e a imagem */
+}
+
+.hero-content {
+    max-width: 50%; /* Permite que o texto ocupe metade da tela em telas grandes */
+    text-align: left;
+    z-index: 2; 
+    flex-shrink: 0; /* Evita que o texto encolha */
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero-content h1 span {
+    background: linear-gradient(to right, var(--accent-blue-gradient-start), var(--accent-blue-gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 40px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 40px;
+    background: linear-gradient(to right, var(--accent-blue-gradient-start), var(--accent-blue-gradient-end));
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 123, 255, 0.6);
+}
+
+.hero-secondary-button {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.hero-secondary-button:hover {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+/*
+ * O container agora é responsável pelo efeito de inclinação (tilt)
+ * e pela borda arredondada.
+ */
+.hero-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    z-index: 1;
+    border-radius: 20px;
+    transform-style: preserve-3d;
+}
+
+/*
+ * A imagem agora tem a sombra e o gradiente da borda.
+ * A imagem é o elemento que realmente se inclina.
+ */
+.hero-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    display: block;
+    object-fit: contain;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.4);
+    transition: transform 0.1s ease-out;
+    /*
+     * Pseudo-elemento para a borda de gradiente,
+     * diretamente na imagem.
+     */
+    padding: 2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+
+/*
+ * As bolinhas agora estão fora do container com "overflow: hidden"
+ * para evitar que sejam "cortadas".
+ */
+.hero-section .icon-point {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    border: 2px solid #fff;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: pulse-subtle 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}/* Bolinhas interativas e tooltips */
+.icon-point {
+    position: absolute;
+    width: 15px; /* Reduz o tamanho da bolinha */
+    height: 15px; /* Reduz o tamanho da bolinha */
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    border: 2px solid #fff; /* Borda ligeiramente mais fina */
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4); /* Sombra mais discreta */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: pulse-subtle 1.8s infinite cubic-bezier(0.66, 0, 0, 1); /* Animação mais sutil */
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Nova keyframe para a animação mais sutil */
+@keyframes pulse-subtle {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.08); opacity: 0.7; } /* Aumenta menos e fica menos opaco */
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+.icon-point:hover {
+    transform: scale(1.2); /* Menor aumento no hover */
+    animation: none;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.6); /* Sombra no hover ainda um pouco mais forte */
+}
+
+/* O tooltip também deve ser ajustado para ser um pouco menor para acompanhar as bolinhas menores */
+.icon-tooltip {
+    position: absolute;
+    top: -35px; /* Ajusta a posição para cima */
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    padding: 8px 12px; /* Reduz o padding */
+    border-radius: 6px; /* Bordas um pouco menos arredondadas */
+    font-size: 0.85rem; /* Fonte um pouco menor */
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Sombra mais discreta */
+    z-index: 10;
+}
+/* ------------------- RECURSOS PRINCIPAIS E CTA - AJUSTE DE CORES ------------------- */
+.recursos-principais-carousel {
+    padding: 60px 20px;
+    background-color: #fff; /* Fundo branco */
+    text-align: center;
+    overflow: hidden;
+    position: relative; 
+}
+
+.recursos-principais-carousel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(0,102,204,0.02) 1px, transparent 1px),
+                radial-gradient(circle at 90% 80%, rgba(0,102,204,0.02) 1px, transparent 1px);
+    background-size: 50px 50px; 
+    animation: none; 
+    opacity: 1; 
+    filter: blur(0.5px);
+    z-index: 0;
+}
+
+.recursos-principais-carousel h2 {
+    font-size: 2.8em; 
+    margin-bottom: 50px;
+    position: relative;
+    display: inline-block;
+    padding: 15px 40px; /* Aumentado o padding para um visual mais robusto */
+    border-radius: 15px; /* Bordas mais arredondadas */
+    background: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente */
+    backdrop-filter: blur(10px); /* Efeito de vidro embaçado */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borda suave */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Sombra mais profunda e suave */
+    font-weight: 700; 
+    letter-spacing: 1px;
+    z-index: 1; 
+    transform: translateY(0); 
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); /* Transição mais suave para todos os efeitos */
+
+    /* Gradiente de texto para o título */
+    background-image: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%); /* Gradiente azul mais vibrante */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+}
+
+.recursos-principais-carousel h2:hover {
+    transform: translateY(-8px) scale(1.03); /* Elevação e leve aumento ao passar o mouse */
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25), /* Sombra ainda mais intensa no hover */
+                0 0 30px rgba(0, 198, 255, 0.4); /* Brilho azul ao redor do título */
+    border-color: rgba(0, 198, 255, 0.5); /* Borda fica mais visível no hover */
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    padding-bottom: 20px; 
+}
+
+.carousel-slide {
+    min-width: 33.33%;
+    box-sizing: border-box;
+    padding: 20px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.resource-card {
+    background: linear-gradient(145deg, var(--card-blue-gradient-start) 0%, var(--card-blue-gradient-end) 100%);
+    color: var(--text-light);
+    border-radius: 15px; 
+    padding: 40px 30px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    position: relative;
+    overflow: hidden; 
+}
+
+.resource-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.resource-card:hover::before {
+    left: 100%;
+}
+
+.resource-card:hover {
+    transform: translateY(-12px) scale(1.03); 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.resource-card h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.resource-card p {
+    font-size: 1em;
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 280px;
+    color: var(--text-light);
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 20px;
+    z-index: 2;
+    position: relative;
+}
+
+.carousel-controls .prev-btn, .carousel-controls .next-btn {
+    background-color: transparent;
+    border: 2px solid var(--accent-blue-gradient-end);
+    color: var(--accent-blue-gradient-end);
+    font-size: 2.5em;
+    padding: 5px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.carousel-controls .prev-btn:hover, .carousel-controls .next-btn:hover {
+    background-color: var(--accent-blue-gradient-end);
+    color: #fff;
+}
+
+/* ------------------- CHAMADA PARA AÇÃO (CTA) - mantida ------------------- */
+.cta-section {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: var(--blue-bg-dark); /* Fundo azul escuro */
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%) rotate(5deg);
+    width: 150%;
+    height: 300px; 
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 102, 204, 0.05),
+        rgba(0, 102, 204, 0.15)
+    );
+    border-radius: 50% 50% 0 0;
+    opacity: 0.8;
+    z-index: 0;
+    animation: wave-effect 8s ease-in-out infinite alternate;
+}
+
+@keyframes wave-effect {
+    from { transform: translateX(-50%) rotate(3deg); }
+    to { transform: translateX(-50%) rotate(-3deg); }
+}
+
+.cta-section h2, .cta-section p, .cta-section .btn {
+    z-index: 1; 
+    position: relative;
+}
+
+.cta-section h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.cta-section p {
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+    opacity: 0.8;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-section .btn {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 50px;
+    background-image: linear-gradient(to right, var(--accent-blue-gradient-start), var(--accent-blue-gradient-end));
+    border: none;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-section .btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 102, 204, 0.6);
+}
+
+/* ------------------- RODAPÉ (FOOTER) ------------------- */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--blue-bg-dark); 
+    color: #88a8c3;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9em;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* ------------------- RESPONSIVIDADE GERAL - MODIFICADA ------------------- */
+@media (max-width: 1024px) {
+    .hero-section {
+        flex-direction: column;
+    }
+    .hero-content {
+        max-width: 100%;
+        text-align: center;
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+    .hero-buttons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+    .carousel-slide {
+        min-width: 100%;
+    }
+    .resource-card {
+        margin: 10px;
+        padding: 25px;
+        min-height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-buttons {
+        flex-direction: column; 
+    }
+}
+/* ------------------- CHAMADA PARA AÇÃO (CTA) - mantida ------------------- */
+.cta-section {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: var(--blue-bg-dark); /* Fundo azul escuro */
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%) rotate(5deg);
+    width: 150%;
+    height: 300px; 
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 102, 204, 0.05),
+        rgba(0, 102, 204, 0.15)
+    );
+    border-radius: 50% 50% 0 0;
+    opacity: 0.8;
+    z-index: 0;
+    animation: wave-effect 8s ease-in-out infinite alternate;
+}
+
+@keyframes wave-effect {
+    from { transform: translateX(-50%) rotate(3deg); }
+    to { transform: translateX(-50%) rotate(-3deg); }
+}
+
+.cta-section h2, .cta-section p, .cta-section .btn {
+    z-index: 1; 
+    position: relative;
+}
+
+.cta-section h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.cta-section p {
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+    opacity: 0.8;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-section .btn {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 50px;
+    background-image: linear-gradient(to right, var(--accent-blue-gradient-start), var(--accent-blue-gradient-end));
+    border: none;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-section .btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 102, 204, 0.6);
+}
+
+/* ------------------- RODAPÉ (FOOTER) ------------------- */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--blue-bg-dark); 
+    color: #88a8c3;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9em;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* ------------------- RESPONSIVIDADE GERAL - MODIFICADA ------------------- */
+@media (max-width: 1024px) {
+    .hero-section {
+        flex-direction: column;
+    }
+    .hero-content {
+        max-width: 100%;
+        text-align: center;
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+    .hero-buttons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+    .carousel-slide {
+        min-width: 100%;
+    }
+    .resource-card {
+        margin: 10px;
+        padding: 25px;
+        min-height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-buttons {
+        flex-direction: column; 
+    }
+}

@@ -1,0 +1,308 @@
+/* css/sobre.css */
+
+/* --- VARIÁVEIS E FONTES --- */
+:root {
+    --primary-color: #007bff; /* Azul primário */
+    --secondary-color: #00B4D8; /* Azul secundário */
+    --dark-color: #1a1a1a;
+    --light-bg-color: #f0f4f8;
+    --card-bg-color: #fff;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --navy-blue: #001f3f; /* Cor azul marinho */
+    --gradient-blue: linear-gradient(45deg, #00c4ff, #007bff); /* Gradiente azul para destacar */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* --- SEÇÃO DE INTRODUÇÃO MODIFICADA --- */
+.about-us-section {
+    padding: 100px 50px;
+    background: linear-gradient(135deg, var(--navy-blue) 0%, #001f3f 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.intro-content {
+    flex: 1;
+    max-width: 600px;
+    text-align: left;
+}
+
+.about-us-section h1 {
+    font-size: 4rem;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.highlight {
+    background: var(--gradient-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.intro-text {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.intro-buttons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.intro-button {
+    padding: 15px 40px;
+    background: var(--gradient-blue);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+    flex-shrink: 0;
+}
+
+.intro-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 123, 255, 0.6);
+}
+
+
+.intro-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 2px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.4);
+    transform-style: preserve-3d;
+    background: #fff;
+    overflow: hidden;
+}
+
+.intro-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #007bff, #00B4D8);
+    z-index: -1;
+}
+
+.intro-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 18px;
+    transition: transform 0.1s ease-out;
+}
+
+/* --- SEÇÃO RECURSOS PRINCIPAIS (NOSSOS VALORES) --- */
+.details-section {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: var(--light-bg-color);
+}
+
+.details-section h2 {
+    font-size: 2.8rem;
+    color: var(--navy-blue);
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.details-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+.details-text {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 700px;
+    margin: 20px auto 60px;
+    line-height: 1.8;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.value-item {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+.value-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: var(--gradient-blue);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+.value-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.value-item h3 {
+    font-size: 1.6rem;
+    color: var(--navy-blue);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.value-item p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.7;
+}
+
+.value-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-blue);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+.value-icon img {
+    width: 30px;
+    height: 30px;
+}
+
+/* --- SEÇÃO EQUIPE --- */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.member-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    margin: 40px auto;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.member-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.member-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid var(--primary-color);
+}
+
+.member-card h3 {
+    font-size: 1.8rem;
+    color: var(--dark-color);
+    margin-bottom: 5px;
+}
+
+.member-card p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.member-card .social-icon {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    color: #0077b5;
+    transition: transform 0.2s ease-in-out;
+}
+
+.member-card .social-icon:hover {
+    transform: scale(1.1);
+}
+
+/* --- MÍDIAS PARA RESPONSIVIDADE --- */
+@media (max-width: 992px) {
+    .about-us-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    .intro-content {
+        text-align: center;
+        max-width: 100%;
+        margin-bottom: 40px;
+    }
+    .intro-buttons {
+        justify-content: center;
+    }
+    .about-us-section h1 {
+        font-size: 3rem;
+    }
+    .intro-image-container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-us-section {
+        padding: 80px 20px;
+    }
+    .about-us-section h1 {
+        font-size: 2.8rem;
+    }
+    .details-section h2 {
+        font-size: 2.2rem;
+    }
+    .value-item {
+        padding: 30px;
+    }
+}

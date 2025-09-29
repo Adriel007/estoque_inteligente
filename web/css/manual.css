@@ -1,0 +1,219 @@
+/* css/manual.css */
+
+/* --- Título principal do manual (Hero Section) --- */
+.manual-page .manual-hero-section {
+    padding: 120px 20px 60px;
+    background-color: #001f3f; /* Fundo azul escuro sólido */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Efeito de brilho sutil */
+.manual-page .manual-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(0, 51, 102, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 90% 80%, rgba(0, 51, 102, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    filter: blur(1px);
+    opacity: 0.8;
+    z-index: 0;
+}
+
+.manual-page .manual-hero-content {
+    position: relative;
+    z-index: 1; /* Garante que o conteúdo fique acima do efeito de fundo */
+}
+
+/* Este é o código para a fonte do título em degradê */
+.manual-page .manual-hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    -webkit-background-clip: text; /* Clipa o background ao formato do texto */
+    -webkit-text-fill-color: transparent; /* Torna a cor do texto transparente */
+}
+
+.manual-page .manual-hero-content p {
+    font-size: 1.15rem;
+    color: #f0f4f8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Estilo para as seções de módulo (passos do manual) --- */
+.manual-page .manual-section {
+    padding: 60px 20px;
+    position: relative;
+    background-color: #fff;
+}
+
+.manual-page .manual-module-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+/* Inverte a ordem das seções para um layout dinâmico */
+.manual-page .manual-section.manual-section-reverse .manual-module-container {
+    flex-direction: row-reverse;
+}
+
+.manual-page .module-image-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.manual-page .module-image-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+}
+
+.manual-page .module-image-card:hover img {
+    transform: scale(1.03);
+}
+
+.manual-page .module-content-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    text-align: left;
+}
+
+.manual-page .topic-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    opacity: 0.6;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.manual-page .module-content-card h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--navy-blue);
+    margin-bottom: 15px;
+}
+
+.manual-page .module-content-card p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* --- Botão manual de destaque --- */
+.manual-page .btn-manual {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #0099ff, #00c4ff);
+    color: #fff;
+    box-shadow: 0 5px 20px rgba(0, 123, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.manual-page .btn-manual:hover {
+    transform: translateY(-3px);
+    box-shadow: 8px 30px rgba(0, 123, 255, 0.5);
+}
+
+.manual-page .btn-manual i {
+    font-size: 1.1rem;
+}
+
+/* --- Seção de Chamada para Ação (CTA) do Manual --- */
+.manual-page .manual-cta-section {
+    padding: 80px 20px;
+    background-color: var(--navy-blue);
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.manual-page .manual-cta-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 700px;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.manual-page .manual-cta-card h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.manual-page .manual-cta-card p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.manual-page .manual-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.manual-page .manual-buttons-container .btn {
+    padding: 15px 35px;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+    .manual-page .manual-module-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .manual-page .manual-section.manual-section-reverse .manual-module-container {
+        flex-direction: column;
+    }
+    
+    .manual-page .module-content-card {
+        text-align: center;
+    }
+    
+    .manual-page .manual-cta-card {
+        padding: 30px;
+    }
+    
+    .manual-page .manual-buttons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}

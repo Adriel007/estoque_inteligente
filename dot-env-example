@@ -1,0 +1,12 @@
+# Configuração do Projeto
+PROJECT_NAME=estoque-inteligente
+PHP_VERSION=8.2-apache
+HOST_PORT=8080
+PHPMYADMIN_PORT=8081
+
+# Configurações do Banco de Dados (MariaDB que é o MySQL do XAMPP)
+DB_IMAGE=mariadb:10.6
+MYSQL_ROOT_PASSWORD=""
+MYSQL_DATABASE=estoque
+MYSQL_USER=root
+MYSQL_PASSWORD=""

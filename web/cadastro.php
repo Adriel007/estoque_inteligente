@@ -2,7 +2,7 @@
 
 if (!empty($_POST)) {
 
-    $servidor = "localhost:3306";
+    $servidor = "db"; // localhost:3306 no xampp
     $usuario = "root";
     $senha = "";
 

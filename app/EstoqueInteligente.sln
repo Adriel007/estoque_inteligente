@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstoqueInteligente", "EstoqueInteligente\EstoqueInteligente.csproj", "{975F3A58-8F85-4E97-AFE9-97265167578C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms", "Forms", "{0D68095C-8E4D-4CF0-ADAF-67676739EA92}"
+	ProjectSection(SolutionItems) = preProject
+		EstoqueInteligente\Form1.cs = EstoqueInteligente\Form1.cs
+		EstoqueInteligente\Form1.Designer.cs = EstoqueInteligente\Form1.Designer.cs
+		EstoqueInteligente\Form1.resx = EstoqueInteligente\Form1.resx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{F1F0C37A-688C-40AD-B03F-336FE3FAFC41}"
+	ProjectSection(SolutionItems) = preProject
+		DatabaseConnection.cs = DatabaseConnection.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{A2ACDB5D-9042-47CE-8F58-C064A64FD959}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{A4739557-63DF-415F-9DB7-09E36DAF0718}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{975F3A58-8F85-4E97-AFE9-97265167578C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{975F3A58-8F85-4E97-AFE9-97265167578C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{975F3A58-8F85-4E97-AFE9-97265167578C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{975F3A58-8F85-4E97-AFE9-97265167578C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

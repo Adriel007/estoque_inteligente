@@ -15,13 +15,28 @@ if (!empty($_POST)) {
         $senha = $_POST['password'];
 
         try {
-            $stmt = $conn->prepare("INSERT INTO usuarios(nome, senha, email) VALUES (:nome, :senha, :email)");
+            $stmt = $conn->prepare("INSERT INTO usuarios(nome, senha, email, chave_ativacao) VALUES (:nome, :senha, :email, :chave_ativacao)");
             $stmt->bindParam(':nome', $nome);
             $stmt->bindParam(':senha', $senha);
             $stmt->bindParam(':email', $email);
+            $chaveAtivacao = bin2hex(random_bytes(5));
+            $stmt->bindParam(':chave_ativacao', $chaveAtivacao);
             $stmt->execute();
 
-            echo "<h2 class='mb-4' style='text-align: center; margin-top: 25px'>Cadastrado com sucesso, agora faça login</h2>";
+            echo "
+                <h2 class='mb-4' style='text-align: center; margin-top: 25px'>Cadastrado com sucesso, agora faça login</h2>
+                <!-- sweetalert to show key -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        Swal.fire({
+                            title: 'Cadastro bem-sucedido!',
+                            html: 'Sua chave de ativação é: <strong>$chaveAtivacao</strong><br>Guarde-a com segurança.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    });
+                </script>
+            ";
         } catch (PDOException $e) {
             echo "<h2 class='pagetitle text-white text-center title titleshadow'>Falha no cadastro</h2>";
         }
@@ -125,16 +140,6 @@ if (!empty($_POST)) {
                     <p class="form-footer">Já tem uma conta? <a href="#" id="show-login">Faça Login</a></p>
                 </div>
             </div>
-            
-            <div class="form-carousel-container">
-                <div class="carousel-track">
-                    <img class="carousel-slide" src="imagens/screenshot-1.png" alt="Tela do software 1">
-                    <img class="carousel-slide" src="imagens/screenshot-2.png" alt="Tela do software 2">
-                    <img class="carousel-slide" src="imagens/screenshot-3.png" alt="Tela do software 3">
-                </div>
-                <button class="carousel-button prev">&#10094;</button>
-                <button class="carousel-button next">&#10095;</button>
-            </div>
         </section>
     </main>
 
@@ -143,5 +148,7 @@ if (!empty($_POST)) {
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/cadastro.js"></script> </body>
+    <script src="js/cadastro.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    </body>
 </html>

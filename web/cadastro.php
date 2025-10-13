@@ -2,7 +2,7 @@
 
 if (!empty($_POST)) {
 
-    $servidor = "db"; // localhost:3306 no xampp
+    $servidor = "db"; // 'localhost:3306' no xampp | 'db' no docker
     $usuario = "root";
     $senha = "";
 
@@ -12,7 +12,7 @@ if (!empty($_POST)) {
     if (isset($_POST['name'])) {
         $nome = $_POST['name'];
         $email = $_POST['email'];
-        $senha = $_POST['password'];
+        $senha = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         try {
             $stmt = $conn->prepare("INSERT INTO usuarios(nome, senha, email, chave_ativacao) VALUES (:nome, :senha, :email, :chave_ativacao)");
@@ -44,7 +44,7 @@ if (!empty($_POST)) {
     // Se o usuário está tentando logar
     else if (isset($_POST['email']) && isset($_POST['password'])) {
         $email = $_POST['email'];
-        $senha = $_POST['password'];
+        $senha = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         $loginStmt = $conn->prepare("SELECT * FROM usuarios WHERE email = :email AND senha = :senha");
         $loginStmt->bindParam(':email', $email);

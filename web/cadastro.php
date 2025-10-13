@@ -2,7 +2,7 @@
 
 if (!empty($_POST)) {
 
-    $servidor = "db"; // 'localhost:3306' no xampp | 'db' no docker
+    $servidor = "localhost:3306"; // 'localhost:3306' no xampp | 'db' no docker
     $usuario = "root";
     $senha = "";
 
@@ -44,15 +44,15 @@ if (!empty($_POST)) {
     // Se o usuário está tentando logar
     else if (isset($_POST['email']) && isset($_POST['password'])) {
         $email = $_POST['email'];
-        $senha = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $senha = $_POST['password'];
 
-        $loginStmt = $conn->prepare("SELECT * FROM usuarios WHERE email = :email AND senha = :senha");
+        // Get the user by email
+        $loginStmt = $conn->prepare("SELECT * FROM usuarios WHERE email = :email");
         $loginStmt->bindParam(':email', $email);
-        $loginStmt->bindParam(':senha', $senha);
         $loginStmt->execute();
-        $login = $loginStmt->fetchAll();
+        $user = $loginStmt->fetch(PDO::FETCH_ASSOC);
 
-        if (count($login) > 0) {
+        if ($user && password_verify($senha, $user['senha'])) {
             header('Location: sobre.html');
             exit();
         } else {
@@ -61,7 +61,7 @@ if (!empty($_POST)) {
     }
 
     $conn = null;
-}
+
 
 ?>
 

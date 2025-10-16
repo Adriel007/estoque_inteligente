@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const mysql = require("mysql2/promise");
 const fs = require("fs/promises");
+const bcrypt = require("bcryptjs");
 
 // 🧩 Configuração do banco de dados (Ajuste a senha se necessário)
 const dbConfig = {
@@ -132,21 +133,28 @@ async function deleteProductImage(imageName) {
 ipcMain.handle("login", async (event, credentials) => {
   try {
     const connection = await getConnection();
-    // NÃO USAMOS CRIPTOGRAFIA DE SENHA AQUI, mas em um app real, a senha DEVE ser criptografada (ex: bcrypt).
     const query =
-      "SELECT id_usuario, nome, email, tipo_usuario FROM usuarios WHERE email = ? AND senha = ?";
-    const [rows] = await connection.execute(query, [
-      credentials.email,
-      credentials.password,
-    ]);
+      "SELECT id_usuario, nome, email, senha, tipo_usuario FROM usuarios WHERE email = ?";
+    const [rows] = await connection.execute(query, [credentials.email]);
     await connection.end();
 
-    if (rows.length > 0) {
-      // Retorna apenas dados seguros, sem a senha
-      return { success: true, user: rows[0] };
-    } else {
+    if (rows.length === 0) {
       return { success: false, message: "E-mail ou senha incorretos." };
     }
+
+    const user = rows[0];
+    const isPasswordValid = await bcrypt.compare(
+      credentials.password,
+      user.senha
+    );
+
+    if (!isPasswordValid) {
+      return { success: false, message: "E-mail ou senha incorretos." };
+    }
+
+    // Remove a senha antes de retornar
+    delete user.senha;
+    return { success: true, user };
   } catch (error) {
     logSQLError("Login", error);
     return { success: false, error: error.message };

@@ -6,7 +6,7 @@ if (!empty($_POST)) {
     $usuario = "root";
     $senha = "";
 
-    $conn = new PDO("mysql:host=$servidor;dbname=estoque", $usuario, $senha);
+    $conn = new PDO("mysql:host=$servidor;dbname=bdestoque", $usuario, $senha);
 
     // Se o usuário está tentando cadastrar
     if (isset($_POST['name'])) {
@@ -15,12 +15,10 @@ if (!empty($_POST)) {
         $senha = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         try {
-            $stmt = $conn->prepare("INSERT INTO usuarios(nome, senha, email, chave_ativacao) VALUES (:nome, :senha, :email, :chave_ativacao)");
+            $stmt = $conn->prepare("INSERT INTO usuarios(nome, senha, email) VALUES (:nome, :senha, :email)");
             $stmt->bindParam(':nome', $nome);
             $stmt->bindParam(':senha', $senha);
             $stmt->bindParam(':email', $email);
-            $chaveAtivacao = bin2hex(random_bytes(5));
-            $stmt->bindParam(':chave_ativacao', $chaveAtivacao);
             $stmt->execute();
 
             echo "
@@ -30,7 +28,7 @@ if (!empty($_POST)) {
                     document.addEventListener('DOMContentLoaded', function() {
                         Swal.fire({
                             title: 'Cadastro bem-sucedido!',
-                            html: 'Sua chave de ativação é: <strong>$chaveAtivacao</strong><br>Guarde-a com segurança.',
+                            html: 'Agora você pode fazer login no aplicativo.',
                             icon: 'success',
                             confirmButtonText: 'OK'
                         });
@@ -61,37 +59,37 @@ if (!empty($_POST)) {
     }
 
     $conn = null;
-
+}
 
 ?>
 
 
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - Estoque Inteligente</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/form.css">
-    </head>
+</head>
+
 <body>
-<header>
-    <nav class="navbar">
-        <div class="logo-container">
-            <img src="imagens/logo.jpg" alt="Logo Estoque Inteligente" class="logo">
-            <span class="brand-name">Estoque Inteligente</span>
-        </div>
-        <div class="menu">
-            <a href="index.html" class="nav-item">Início</a>
-            <a href="sobre.html" class="nav-item">Sobre Nós</a>
-            <a href="manual.html" class="nav-item">Manual</a>
-            <a href="cadastro.html" class="btn btn-primary">Login/Cadastro</a>
-        </div>
-    </nav>
-</header>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="imagens/logo.jpg" alt="Logo Estoque Inteligente" class="logo">
+                <span class="brand-name">Estoque Inteligente</span>
+            </div>
+            <div class="menu">
+                <a href="index.html" class="nav-item">Início</a>
+                <a href="sobre.html" class="nav-item">Sobre Nós</a>
+                <a href="manual.html" class="nav-item">Manual</a>
+                <a href="cadastro.html" class="btn btn-primary">Login/Cadastro</a>
+            </div>
+        </nav>
+    </header>
     <main class="container">
         <section class="form-section">
 
@@ -105,7 +103,7 @@ if (!empty($_POST)) {
                     <h2>Bem-vindo(a) de volta!</h2>
                     <p>Faça login para gerenciar seu estoque.</p>
                 </div>
-                
+
                 <div class="form-box login-box active" id="login-form">
                     <form action="" method="POST">
                         <div class="form-group">
@@ -133,7 +131,8 @@ if (!empty($_POST)) {
                         </div>
                         <div class="form-group">
                             <label for="cadastro-password">Senha</label>
-                            <input type="password" id="cadastro-password" name="password" placeholder="Crie uma senha" required>
+                            <input type="password" id="cadastro-password" name="password" placeholder="Crie uma senha"
+                                required>
                         </div>
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </form>
@@ -150,5 +149,6 @@ if (!empty($_POST)) {
     <script src="js/main.js"></script>
     <script src="js/cadastro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
-    </body>
+</body>
+
 </html>

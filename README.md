@@ -62,3 +62,8 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 # Screenshots
 ![Aplicação](application-screenshot.jpg)
 ![Web](web-screenshot.png)
+
+---
+
+# Releases
+[Baixar no Drive](https://drive.google.com/file/d/1FxyJWozPCdVReiFiYBejyNwAVcbNd9py/view?usp=sharing)

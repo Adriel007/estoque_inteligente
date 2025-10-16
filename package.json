@@ -1,0 +1,43 @@
+{
+  "name": "estoque-inteligente",
+  "version": "1.0.0",
+  "description": "Sistema de Estoque Inteligente com Electron e MySQL",
+  "author": "Seu Nome",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron ./app/main.js",
+    "build": "electron-builder"
+  },
+  "dependencies": {
+    "mysql2": "^3.15.2"
+  },
+  "devDependencies": {
+    "electron": "^38.3.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.seuapp.estoqueinteligente",
+    "productName": "Estoque Inteligente",
+    "copyright": "© 2025 Seu Nome",
+    "directories": {
+      "buildResources": "assets"
+    },
+    "files": [
+      "app/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

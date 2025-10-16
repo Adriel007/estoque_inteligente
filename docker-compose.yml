@@ -1,4 +1,24 @@
 services:
+  electron:
+    build:
+      context: ./app
+      args:
+        NODE_VERSION: ${NODE_VERSION}
+    container_name: electron-app
+    environment:
+      - DISPLAY=${DISPLAY}
+      - XAUTHORITY=${XAUTHORITY}
+      - ELECTRON_DISABLE_SECURITY_WARNINGS=true
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${XAUTHORITY}:${XAUTHORITY}
+      - ./:/app
+    devices:
+      - /dev/dri:/dev/dri
+    network_mode: "host"
+    privileged: true
+    tty: true
+
   web:
     build:
       context: ./web

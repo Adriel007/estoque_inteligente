@@ -1,2 +1,2 @@
 FROM mariadb:latest 
-COPY table.sql /docker-entrypoint-initdb.d/
+COPY bdestoque.sql /docker-entrypoint-initdb.d/

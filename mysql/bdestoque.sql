@@ -33,11 +33,13 @@ CREATE TABLE `usuarios` (
 --
 -- Despejando dados para a tabela `usuarios`
 --
+/*
+-- NÃO FUNCIONAM POIS ESTÃO SEM HASH
 INSERT INTO `usuarios` (`id_usuario`, `nome`, `email`, `senha`, `tipo_usuario`, `data_criacao`) VALUES
 (1, 'Glória Kristina Ferreira Lagerstrom', 'gloria@gmail.com', '1234567', 'admin', '2025-09-27 13:14:24'),
 (2, 'alefer silva marinho', 'gustavorsmelo@gmail.com', '123', 'funcionario', '2025-10-12 20:44:01'),
 (3, 'Funcionário João', 'joao@estoque.com', '123456', 'funcionario', '2025-10-12 20:44:01');
-
+*/
 
 -- --------------------------------------------------------
 
@@ -258,11 +260,14 @@ COMMIT;
 -- ==============================
 -- 1️⃣  NOVOS USUÁRIOS
 -- ==============================
+/*
+-- NÃO FUNCIONAM POIS ESTÃO SEM HASH
 INSERT INTO usuarios (nome, email, senha, tipo_usuario, data_criacao) VALUES
 ('Mariana Duarte', 'mariana@empresa.com', '123456', 'funcionario', NOW()),
 ('Roberto Lima', 'roberto@empresa.com', '123456', 'funcionario', NOW()),
 ('Patrícia Gomes', 'patricia@empresa.com', '123456', 'admin', NOW()),
 ('Felipe Rocha', 'felipe@empresa.com', '123456', 'funcionario', NOW());
+*/
 
 -- ==============================
 -- 2️⃣  NOVOS FORNECEDORES

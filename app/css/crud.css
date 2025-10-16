@@ -1,0 +1,150 @@
+/* Estilos Gerais */
+body {
+    overflow-x: hidden;
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+#sidebar {
+    background: #001f3f; /* Azul escuro, como na imagem */
+    width: 250px;
+    transition: all 0.3s;
+    color: white;
+}
+
+.sidebar-logo {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #003366;
+}
+
+.sidebar-container ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #003366;
+    list-style: none;
+    margin: 0;
+}
+
+.sidebar-container ul li a {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    display: block;
+    color: #aeb2b7;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.sidebar-container ul li a:hover {
+    color: #ffffff;
+    background: #003366;
+}
+
+.sidebar-container ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #003366;
+}
+
+
+/* Conteúdo Principal */
+#page-content-wrapper {
+    width: calc(100% - 250px);
+    padding: 20px;
+    position: relative;
+    flex-grow: 1;
+}
+
+.main-title {
+    color: #001f3f;
+    font-weight: 600;
+}
+
+.sub-title {
+    color: #555;
+    font-weight: 300;
+    margin-top: -5px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control, .form-select {
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+}
+
+.form-control:disabled {
+    background-color: #e9ecef;
+}
+
+/* Imagem do Produto */
+.foto-container {
+    position: relative;
+    width: 150px; /* Ajuste o tamanho conforme necessário */
+    height: 150px;
+}
+
+.foto-container .img-fluid {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.foto-container .check-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 40px; /* Tamanho do ícone de check */
+}
+
+/* Botões de Ação na parte inferior */
+.action-buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #e9ecef;
+    padding: 15px 40px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.btn-action {
+    background-color: #2e7d32; /* Verde dos botões */
+    border: none;
+    color: white;
+    font-weight: 500;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.btn-action:hover {
+    background-color: #1b5e20; /* Verde mais escuro no hover */
+    color: white;
+}
+
+.btn-action img {
+    height: 20px;
+}
+
+.btn-back img {
+    transition: transform 0.2s;
+}
+.btn-back:hover img {
+    transform: scale(1.1);
+}

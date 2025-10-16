@@ -1,0 +1,106 @@
+/* Definições Globais e Variáveis de Cor */
+:root {
+    --primary-color: #2c3e8f; /* Um azul escuro similar ao da imagem. Ajuste se necessário. */
+    --secondary-color: #6c757d; /* Cinza para o texto secundário */
+    --background-light: #ffffff;
+    --font-family: 'Poppins', sans-serif; /* Fonte moderna e limpa */
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--background-light);
+}
+
+/* Coluna da Imagem */
+.bg-image-container {
+    /* !! IMPORTANTE: Troque 'img/fundo-login.png' pelo caminho da sua imagem de fundo !! */
+    background-image: url('../Imagens/3257989.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Container do Formulário de Login */
+.login-form-container {
+    width: 100%;
+    max-width: 450px; /* Limita a largura do formulário para melhor leitura */
+    padding: 2rem;
+}
+
+.logo {
+    max-width: 80px; /* Ajuste o tamanho da sua logo */
+    margin-bottom: 1rem;
+}
+
+.login-heading {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-subheading {
+    color: var(--secondary-color);
+    margin-bottom: 2.5rem;
+}
+
+/* Estilização dos campos do formulário */
+.form-group {
+    position: relative;
+}
+
+.form-group label {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-control {
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    height: 50px; /* Altura fixa para os inputs */
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(44, 62, 143, 0.25); /* Sombra ao focar */
+}
+
+/* Estilização do Botão de Login */
+.btn-login {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-login:hover {
+    background-color: var(--primary-color);
+    color: var(--background-light);
+}
+
+/* Ajuste para alinhar o botão à direita como na imagem */
+.d-grid {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-login {
+    width: 120px; /* Largura fixa para o botão */
+}
+
+#email-label, #senha-label {
+    margin-bottom: -10px;
+    background-color: white;
+    width: fit-content;
+    margin-left: 10px;
+    padding: 2px;
+}

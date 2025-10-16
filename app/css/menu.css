@@ -1,0 +1,115 @@
+/* Definições Globais e Variáveis */
+:root {
+    --sidebar-bg: #191c38; /* Azul bem escuro da sidebar */
+    --main-bg: #f4f7fc;
+    --accent-color: #00b0f0; /* Azul claro dos cards e ícones */
+    --primary-text: #343a40;
+    --secondary-text: #6c757d;
+    --card-bg: #ffffff;
+    --font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--main-bg);
+}
+
+/* --- Barra Lateral (Sidebar) --- */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    color: white;
+    min-height: 100vh;
+    padding: 1.5rem 1rem;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding-left: 0.5rem;
+}
+
+.sidebar-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+}
+
+.sidebar-header h3 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.sidebar .nav-link {
+    color: #aeb2d3;
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar .nav-link i {
+    font-size: 1.8rem; /* Tamanho dos ícones */
+    margin-right: 1rem;
+    width: 30px; /* Alinha o texto mesmo com ícones de larguras diferentes */
+    text-align: center;
+}
+
+.sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Estilo do item de menu ativo */
+.sidebar .nav-link.active {
+    background-color: white;
+    color: var(--sidebar-bg);
+    font-weight: 600;
+}
+
+/* --- Conteúdo Principal --- */
+.main-content {
+    flex-grow: 1;
+    padding: 2.5rem;
+}
+
+/* --- Cards de Estatísticas --- */
+.stat-card {
+    background-color: var(--card-bg);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid var(--accent-color);
+    padding: 1rem;
+}
+
+.stat-card .card-title {
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.stat-card .card-value {
+    color: var(--primary-text);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.stat-card .card-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+}
+
+/* --- Gráficos --- */
+.chart-container {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}

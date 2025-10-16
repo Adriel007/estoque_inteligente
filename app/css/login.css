@@ -103,4 +103,5 @@ body, html {
     width: fit-content;
     margin-left: 10px;
     padding: 2px;
+    z-index: 2;
 }

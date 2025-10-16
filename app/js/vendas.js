@@ -1,74 +1,107 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // ========== 1. GRÁFICO DE PIZZA (Vendas por Categoria) ==========
+// vendas.js
+
+const { ipcRenderer } = require("electron");
+
+const formatCurrency = (value) => {
+  if (typeof value !== "number") {
+    return "R$ 0,00";
+  }
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+};
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const response = await ipcRenderer.invoke("get-dashboard-data");
+
+  if (!response.success) {
+    console.error("Falha ao carregar os dados do dashboard:", response.error);
+    const container = document.querySelector(".container-fluid");
+    container.innerHTML = `<div class="alert alert-danger">Erro ao carregar os dados do dashboard: ${response.error}</div>`;
+    return;
+  }
+
+  const data = response.data;
+
+  // Preenche os cartões
+  const statCards = document.querySelectorAll(".stat-card");
+  statCards[0].querySelector(".card-value").textContent = data.soldToday || 0;
+  statCards[1].querySelector(".card-value").textContent = data.totalSales || 0;
+  statCards[2].querySelector(".card-value").textContent = formatCurrency(
+    data.revenueToday
+  );
+  statCards[3].querySelector(".card-value-small").textContent = formatCurrency(
+    data.averageTicketToday
+  );
+  statCards[4].querySelector(".card-value-small").textContent =
+    data.pendingOrders;
+  statCards[5].querySelector(".card-value-small").textContent = data.topProduct;
+  statCards[6].querySelector(".card-value-small").textContent =
+    data.newCustomers;
+  statCards[7].querySelector(".card-value-small").textContent = data.salesGoal;
+
+  const chartColors = [
+    "#4e73df",
+    "#1cc88a",
+    "#36b9cc",
+    "#f6c23e",
+    "#e74a3b",
+    "#858796",
+    "#f8f9fc",
+    "#5a5c69",
+  ];
+
+  // GRÁFICO DE PIZZA
   const pieCtx = document.getElementById("pieChart").getContext("2d");
-  const pieChart = new Chart(pieCtx, {
+  new Chart(pieCtx, {
     type: "pie",
     data: {
-      labels: ["2", "3", "4", "5", "6", "7"],
+      labels: data.salesByCategory.labels,
       datasets: [
-        {
-          data: [15, 25, 20, 10, 10, 20],
-          backgroundColor: [
-            "#4e73df",
-            "#1cc88a",
-            "#36b9cc",
-            "#f6c23e",
-            "#e74a3b",
-            "#858796",
-          ],
-        },
+        { data: data.salesByCategory.data, backgroundColor: chartColors },
       ],
     },
     options: {
       responsive: true,
-      plugins: {
-        legend: {
-          position: "right",
-        },
-      },
+      // maintainAspectRatio: false, // REMOVIDO
+      plugins: { legend: { position: "right" } },
     },
   });
 
-  // ========== 2. GRÁFICO DE BARRAS (Produtos Mais Vendidos) ==========
+  // GRÁFICO DE BARRAS
   const barCtx = document.getElementById("barChart").getContext("2d");
-  const barChart = new Chart(barCtx, {
+  new Chart(barCtx, {
     type: "bar",
     data: {
-      labels: ["2", "3", "4", "5", "6", "7"],
+      labels: data.topSellingProducts.labels,
       datasets: [
         {
-          label: "Series1",
-          data: [40, 65, 75, 50, 45, 70],
+          label: "Quantidade Vendida",
+          data: data.topSellingProducts.data,
           backgroundColor: "#4e73df",
         },
       ],
     },
     options: {
-      indexAxis: "y", // Deixa as barras na horizontal
+      indexAxis: "y",
       responsive: true,
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      scales: {
-        x: {
-          beginAtZero: true,
-        },
-      },
+      // maintainAspectRatio: false, // REMOVIDO
+      plugins: { legend: { display: false } },
+      scales: { x: { beginAtZero: true } },
     },
   });
 
-  // ========== 3. GRÁFICO DE LINHA (Giro de Estoque) ==========
+  // GRÁFICO DE LINHA
   const lineCtx = document.getElementById("lineChart").getContext("2d");
-  const lineChart = new Chart(lineCtx, {
+  new Chart(lineCtx, {
     type: "line",
     data: {
-      labels: ["1", "3", "5", "7", "2", "4", "6", "8"],
+      labels: data.stockTurnover.labels,
       datasets: [
         {
-          label: "Series1",
-          data: [80, 60, 45, 50, 20, 40, 70, 90],
+          label: "Itens Vendidos",
+          data: data.stockTurnover.data,
           borderColor: "#4e73df",
           tension: 0.1,
         },
@@ -76,47 +109,25 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     options: {
       responsive: true,
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
+      // maintainAspectRatio: false, // REMOVIDO
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true } },
     },
   });
 
-  // ========== 4. GRÁFICO DE FUNIL (Vendas do Mês) ==========
+  // GRÁFICO DE FUNIL
   const funnelCtx = document.getElementById("funnelChart").getContext("2d");
-  const funnelChart = new Chart(funnelCtx, {
+  new Chart(funnelCtx, {
     type: "funnel",
     data: {
-      labels: ["7", "6", "5", "4", "3", "2"],
-      datasets: [
-        {
-          data: [15, 20, 25, 30, 40, 50],
-          backgroundColor: [
-            "#e74a3b",
-            "#f6c23e",
-            "#36b9cc",
-            "#1cc88a",
-            "#4e73df",
-            "#858796",
-          ],
-        },
-      ],
+      labels: data.salesFunnel.labels,
+      datasets: [{ data: data.salesFunnel.data, backgroundColor: chartColors }],
     },
     options: {
-      indexAxis: "y", // Deixa o funil na vertical (pirâmide)
+      indexAxis: "y",
       responsive: true,
-      plugins: {
-        legend: {
-          position: "right",
-        },
-      },
+      // maintainAspectRatio: false, // REMOVIDO
+      plugins: { legend: { position: "right" } },
     },
   });
 });

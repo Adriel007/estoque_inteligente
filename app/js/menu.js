@@ -1,109 +1,106 @@
-// Aguarda o conteúdo da página carregar para executar o script
-document.addEventListener("DOMContentLoaded", function () {
-  // --- Gráfico de Linha ---
+const { ipcRenderer } = require("electron");
+
+// Função auxiliar para formatar valores monetários
+const formatCurrency = (value) => {
+  return (value || 0).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+};
+
+document.addEventListener("DOMContentLoaded", async () => {
+  // 1. REQUISITA OS DADOS DO DASHBOARD AO PROCESSO PRINCIPAL
+  const response = await ipcRenderer.invoke("get-menu-dashboard-data");
+
+  if (!response.success) {
+    console.error("Falha ao carregar dados do menu:", response.error);
+    document.querySelector(
+      ".main-content"
+    ).innerHTML = `<div class="alert alert-danger">Erro ao carregar dados: ${response.error}</div>`;
+    return;
+  }
+
+  const data = response.data;
+
+  // 2. PREENCHE OS CARTÕES DE ESTATÍSTICAS
+  const statCards = document.querySelectorAll(".stat-card .card-value");
+  statCards[0].textContent = formatCurrency(data.balance);
+  statCards[1].textContent = data.salesCount;
+  statCards[2].textContent = `${data.growth}%`;
+  statCards[3].textContent = data.ranking;
+
+  // 3. INICIALIZA OS GRÁFICOS COM DADOS DINÂMICOS
+
+  // --- Gráfico de Linha (Saídas Diárias) ---
   const lineCtx = document.getElementById("lineChart").getContext("2d");
-  const lineChart = new Chart(lineCtx, {
+  new Chart(lineCtx, {
     type: "line",
     data: {
-      labels: ["1", "2", "3", "4", "5", "6", "7", "8"],
+      labels: data.dailySales.labels,
       datasets: [
         {
-          label: "Series 1",
-          data: [65, 80, 81, 75, 22, 85, 40, 60],
-          borderColor: "#36A2EB",
-          tension: 0.4, // Suaviza a linha
+          label: "Vendas por Dia",
+          data: data.dailySales.data,
+          borderColor: "#4e73df",
+          tension: 0.4,
           fill: false,
         },
       ],
     },
     options: {
       responsive: true,
-      plugins: {
-        legend: {
-          position: "top",
-          align: "end",
-        },
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 100,
-        },
-      },
+      plugins: { legend: { position: "top", align: "end" } },
+      scales: { y: { beginAtZero: true } },
     },
   });
 
-  // --- Gráfico de Barras ---
+  // --- Gráfico de Barras (Saídas Diárias) ---
   const barCtx = document.getElementById("barChart").getContext("2d");
-  const barChart = new Chart(barCtx, {
+  new Chart(barCtx, {
     type: "bar",
     data: {
-      labels: ["1", "2", "3", "4", "5", "6", "7", "8"],
+      labels: data.dailySales.labels,
       datasets: [
         {
-          label: "Series 1",
-          data: [73, 82, 71, 20, 80, 40, 0],
-          backgroundColor: "#36A2EB",
+          label: "Vendas por Dia",
+          data: data.dailySales.data,
+          backgroundColor: "#1cc88a",
           borderRadius: 4,
         },
       ],
     },
     options: {
       responsive: true,
-      plugins: {
-        legend: {
-          position: "top",
-          align: "end",
-        },
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 100,
-        },
-      },
+      plugins: { legend: { position: "top", align: "end" } },
+      scales: { y: { beginAtZero: true } },
     },
   });
 
-  // --- Gráfico de Funil ---
+  // --- Gráfico de Funil (Estoque por Categoria) ---
   const funnelCtx = document.getElementById("funnelChart").getContext("2d");
-  const funnelChart = new Chart(funnelCtx, {
-    type: "funnel", // Tipo de gráfico do plugin
+  new Chart(funnelCtx, {
+    type: "funnel",
     data: {
-      labels: ["2", "3", "4", "5", "6", "7"],
+      labels: data.stockByCategory.labels,
       datasets: [
         {
-          data: [90, 70, 50, 20, 10, 5],
+          data: data.stockByCategory.data,
           backgroundColor: [
-            "#36A2EB",
-            "#FFC107",
-            "#DC3545",
-            "#6c757d",
-            "#20c997",
-            "#191c38",
-          ],
-          hoverBackgroundColor: [
-            "#36A2EB",
-            "#FFC107",
-            "#DC3545",
-            "#6c757d",
-            "#20c997",
-            "#191c38",
+            "#4e73df",
+            "#1cc88a",
+            "#36b9cc",
+            "#f6c23e",
+            "#e74a3b",
+            "#858796",
           ],
         },
       ],
     },
     options: {
-      // ADICIONE ESTA LINHA PARA DEIXAR O GRÁFICO NA VERTICAL
       indexAxis: "y",
-
       responsive: true,
       maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: "right",
-        },
-      },
+      plugins: { legend: { position: "right" } },
     },
   });
 });
